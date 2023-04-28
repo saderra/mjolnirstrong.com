@@ -4,11 +4,85 @@
 <body {% if layout %}class="{{ layout }}"{% endif %}>
 {% include "components/header/header.njk" %}
 
+<div class="shadow-inner bg-home-cover bg-top bg-cover py-8 px-2 md:p-20 xl:p-24 text-white font-normal poppins shadow-lg">
+    <div class="container">
+
+        <div class="bg-neutral-900/80 p-12 max-w-3xl">
+            <h1 class="block text-3xl md:text-4xl tracking-tight font-semibold lg:leading-masthead pb-6 border-b border-white/25 max-w-xs sm:max-w-none uppercase">
+                Mjolnir Strong
+            </h1>
+            
+            <p class="text-lg leading-8 tracking-wide mt-6 block">
+                Welcome to Mjolnir Strong, where I believe that training like a Viking is not only physically beneficial, but also mentally empowering. Mjolnir Strong goes beyond the typical workout routine to provide a training experience that will make you feel like a true warrior. The name, inspired by Thor's powerful hammer, represents my commitment to help you build strength and resilience like that of a true Viking. So, if you're ready to unleash your inner Viking and achieve unparalleled levels of strength and fitness, then come train the Mjolnir Strong way.
+            </p>
+        </div>   
+        
+    </div>
+</div>
+
+<!-- About Section --> 
+<div class="bg-neutral-100 py-24">
+    <div class="container about-text">
+
+        <div class="max-w-md mx-auto">
+
+        <h2 class="text-[2.8rem] font-extrabold uppercase pb-4 border-b-4 mb-6">About Mjolnir Strong</h2>
+
+        <p>Welcome to Mjolnir Strong, the ultimate personal training for fierce Vikings and Shieldmaidens who are ready to conquer any challenge that comes their way! I'm Eric, the proud owner of Mjolnir strong, located in Denver, Colorado. As a certified personal trainer with over 10 years of experience, I've seen it all and loved every moment of helping people achieve their fitness goals.</p>
+
+        <p>Mjolnir Strong is not just about lifting weights and getting stronger. I believe that fitness is about so much more than just looking good. That's why my mission is to help clients feel great, gain mobility, and improve their overall quality of life. I understand that our sedentary lifestyles can lead to health issues as we age, but I am here to help you combat that and live your best life.</p>
+
+        <p>So if you're ready to unleash your inner Viking and train like a true warrior, Mjolnir Strong is the place for you. My programs are tailored to your unique needs, so whether you're a seasoned fitness enthusiast or a beginner, I've got you covered. Come join us and let's transform your mind, body, and spirit together! Reach out today, I offer free consultations, as well as online and in person training options so you can experience the power of Mjolnir Strong for yourself.</p>
+        </div>
+    </div>
+</div>
 
 
-<section class="bg-neutral-50">
-   {% block mainContent %}{% endblock %}
-</section>
+<div class="bg-neutral-900 py-24 text-white">
+    <div class="container approacht-text">
+
+        <div class="max-w-md mx-auto">
+
+        <h2 class="text-[2.8rem] font-extrabold uppercase pb-4 border-b-4 mb-6">Our Approach</h2>
+
+        <p>Text Here</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-neutral-200 py-24">
+    <div class="container approacht-text">
+
+        <div class="max-w-md mx-auto">
+
+        <h2 class="text-[2.8rem] font-extrabold uppercase pb-4 border-b-4 mb-6">Get Started</h2>
+
+        <form name="Mjolnir Strong" method="POST" data-netlify="true" action="/connect/success">
+
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" />
+
+            <label for="email">Your Email:</label>
+            <input type="email" name="email" />
+
+            <label for="message">Message:</label>
+            <textarea name="message"></textarea>
+
+        <button type="submit" class="bg-neutral-800 text-white poppins px-6 py-3">Send</button>
+
+</form>
+
+        </div>
+    </div>
+</div>
+    
+    
+    
+
+
+
+
 
 {% include "components/footer/footer.njk" %}
 

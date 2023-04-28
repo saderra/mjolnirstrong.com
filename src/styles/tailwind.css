@@ -2,27 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;800&display=swap');
+.inter { 
+	font-family: 'Inter', sans-serif;
+}
 body { 
-  @apply font-sans;
+  @apply inter;
 }
 
-.poppins { 
-  font-family: 'Poppins', sans-serif;
-}
+
 
 h1, h2, h3, h4, h5, h6 { 
-  font-family: 'Poppins', sans-serif;
+	font-family: 'Inter', sans-serif;
   @apply m-0 p-0;
 }
 
 /****** MAIN NAVIGATION ***/
 
 ul.main-navigation {
-  @apply poppins text-base text-neutral-700 font-medium;
+  @apply inter text-base text-neutral-700 font-medium;
 }
 
 ul.main-navigation {
-  @apply poppins;
+  @apply inter;
 }
 
 ul.main-navigation > li {
@@ -53,28 +55,10 @@ ul.main-navigation > li > ul > li:last-of-type {
   @apply border-none rounded-b-lg;
 }
 
-/****** BLOG ***/
 
-
-article,
-.blog-card { 
-	@apply mb-8 bg-white p-4 md:p-6 shadow-sm rounded-md;
+p { 
+	@apply inter block max-w-xl mb-6 mx-auto text-lg leading-7;
 }
-
-.blog-card img { 
-	@apply w-auto mb-4 md:mb-6 rounded-md; 
-}
-
-.blog-card-content { 
-	@apply bg-neutral-50 p-5 md:p-8 rounded-md shadow-inner;
-}
-
-
-.blog-card-content .read-more { 
-	@apply poppins inline-flex items-center px-5 py-3 uppercase mt-6 border border-transparent shadow-sm font-medium rounded-md text-white bg-cfpurple; 
-}
-
-
 
 /****** SIDEBAR ***/
 
