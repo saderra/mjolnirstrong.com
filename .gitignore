@@ -1,0 +1,8 @@
+node_modules/
+_site/
+source/
+package-lock.json
+.DS_Store
+.env
+netlify/functions/search/**  
+!netlify/functions/search/index.js

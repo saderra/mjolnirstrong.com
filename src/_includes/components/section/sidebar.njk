@@ -1,0 +1,70 @@
+<div class="col-span-12 lg:col-span-4" id="sidebar">
+
+        <div>
+        <h2>Search</h2>
+        <form class="relative" action="/search/" method="GET">
+            <input type="search" autocomplete="false" name="query" class="w-full rounded-lg p-4 border-neutral-300 focus:border-cfpurple-dark" placeholder="Enter Search Term..." required />
+        </form>
+        {# <section id="search"></section> #}
+    </div>
+
+    {% if template == "home" %} 
+
+        
+
+        <div>
+            <h2>About Corinne</h2>
+            <p>I am a researcher and malcontent humanist with a doctorate in psychology. The first twenty years of my professional life were spent as a technology and marketing consultant, traveling the world and connecting diverse cultures through shared interests and needs. I believe in our species. My work strengthens the ties that bind us together and sever the traditions and practices that fan the flames of division.</p>
+        </div>
+
+        <div>
+            <h2>Why Study Loneliness?</h2>
+            <p>For too many years, my research focused on divisive topics. I would advocate for institutional change without regard for backlash or consequences. I began to recognize that the issues facing those across various groups were all rooted in the same, commonly shared struggles.</p>
+            <p>I am an extroverted introvert, so the topic of loneliness has always been fascinating to me. How am I content with significantly less human interaction than others? As I began my research, I saw that many countries had recognized loneliness as the single most dangerous cause of death within their populations. Many have appointed Ministers of Loneliness to address this issue, but success has been hard to achieve. That is why I consider myself the Unofficial Minister of Loneliness - the person who gets to keep working to solve this crisis without the fear of being fired for failure.</p>
+        </div>
+    {% endif %} 
+
+
+
+    <div>
+
+        <h2>30 Minute Free Consultation</h2>
+
+        <a href="https://drfreer.clientsecure.me/request/service" class="block text-center font-bold bg-teal-700 rounded-md p-4 w-[70%] mt-6 text-xl no-underline  text-white" target="_blank">Click Here To Schedule</a>
+    </div>
+
+        <div>
+
+        <h2>Give Me A Call</h2>
+
+        <a href="tel:303-956-9684" class="block text-center font-bold bg-teal-700 rounded-md p-4 w-[70%] mt-6 text-xl no-underline  text-white">303-956-9684</a>
+    </div>
+
+
+
+
+
+    <div>
+
+        <h2>Topics</h2>
+        <ul>
+            {%- for cat in collections.getCat -%}
+                <li class="block"> 
+                    <a href="/articles/categories/{{ cat | slug }}" class="inline-block capitalize p-4 text-neutral-600 w-full rounded-md my-2 bg-neutral-200/60 hover:bg-neutral-200 font-semibold"> {{ cat | title }} </a>    
+                </li>
+            {%- endfor -%} 
+        </ul>
+    </div>
+
+    {% if site.social.twitter %}
+    <div class="px-8 py-4 bg-neutral-100">
+        <h2>Latest From Twitter</h2>
+        <a class="twitter-timeline" 
+            data-theme="light"
+            data-width="400"
+            data-chrome="transparent noheader nofooter noborders"
+            data-tweet-limit="5"
+            href="https://twitter.com/drcorinnefreer">Tweets by Dr. Freer</a>
+    </div>
+    {% endif %}
+</div>

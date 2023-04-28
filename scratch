@@ -1,0 +1,175 @@
+
+<h2 class="font-normal my-2 text-3xl md:text-4xl border-none tracking-tight">{{ title }}</h2>
+
+- { label: 'URL', name: 'permalink', widget: 'string' }
+<div class="bg-white py-16">
+    <main {% if mainID %} id="{{ mainID }}" {% else %} id="main" {% endif %} class="container">
+
+        <div class="max-w-4xl mx-auto prose-lg">
+            {{ content | safe }}
+        </div>
+
+    </main>
+</div>
+{% if 'article' in permalink %}
+<a href="/articles" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Articles</a>
+{% endif %}
+
+{% if 'transkit' in permalink %}
+<a href="/gender/transkit/" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">TransKit Learning Modules</a>
+{% endif %}
+
+
+<div class="col-span-1 bg-white shadow text-center">
+
+    <a href="{{ post.data.permalink }}">
+    <img src="{{ post.data.cover }}" alt="{{ post.data.title }} main image" />
+    </a>
+
+    <h2 class="p-3 tracking-tight text-white text-xl border-b bg-cfpurple border-t border-white/25"><a href="{{ post.data.permalink }}">{{ post.data.title }}</a></h2>
+    <p class="text-sm text-neutral-600 py-2 bg-neutral-100">Published: {{ post.data.date | postDate }}</p>
+
+    <div class="text-base leading-6 p-6 text-left text-neutral-600">
+        {{ post.data.summary }}
+        <br />
+        <a class="text-rose-800 block mt-4" href="{{ post.data.permalink }}">Read More &raquo;</a>
+    </div>
+
+</div>
+
+
+
+
+<nav class="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0">
+
+    <!-- Previous Link Hidden On First Page -->
+    {% if pagination.href.previous %}
+    <div class="-mt-px w-0 flex-1 flex">
+        <a href="{{ pagination.href.previous }}" data-url="{{ pagination.href.previous }}" class="border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
+            <!-- Heroicon name: solid/arrow-narrow-left -->
+            <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Previous
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Numbered Navigation -->
+    <div class="hidden md:-mt-px md:flex">
+        {%- for pageEntry in pagination.pages %}
+        <a href="{{ pagination.hrefs[ loop.index0 ] }}" data-url="{{ pagination.hrefs[ loop.index0 ] }}" {% if page.url == pagination.hrefs[ loop.index ] %} aria-current="page"{% endif %} class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">{{ loop.index }}</a>
+        {%- endfor %}
+    </div>
+
+
+    <!-- Next Navigation Hidden On Last Page -->
+    {% if pagination.href.next %}
+    <div class="-mt-px w-0 flex-1 flex justify-end">
+        <a href="{{ pagination.href.next }}" data-url="{{ pagination.href.next }}" class="border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
+            Next
+            <!-- Heroicon name: solid/arrow-narrow-right -->
+            <svg class="ml-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
+    {% endif %}
+
+
+</nav>
+
+<div>
+    <div id="loader" class="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center hidden">
+        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+        <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
+    </div>
+</div>
+
+<script>
+    function loadArticle(e){
+        e.preventDefault();
+        let element = e.target;
+        let domain = window.location.origin;
+
+        document.querySelector('#loader').classList.remove('hidden');
+        fetch(domain+element.getAttribute('data-url'))
+        .then(res=>res.text())
+        .then(html=>{
+            let HTML = document.createElement('div');
+            HTML.innerHTML = html;
+            document.querySelector('#main').innerHTML = HTML.querySelector('#main').innerHTML;
+            document.querySelector('#loader').classList.add('hidden');
+
+            document.querySelectorAll('a[data-url]').forEach(element=>{
+                element.addEventListener('click', loadArticle)
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+            document.querySelector('#loader').classList.add('hidden');
+        })
+        console.log(element);
+    }
+    document.querySelectorAll('a[data-url]').forEach(element=>{
+        element.addEventListener('click', loadArticle)
+    })
+</script>
+
+
+
+
+{% set latest_posts = collections.articles | reverse %}
+
+<div class="bg-white pt-10 pb-20 px-4 sm:px-6 lg:py-10 lg:px-8 z-10">
+  <div class="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
+
+    <div class="px-7">
+      <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">Recent Articles</h2>
+      <h4 class="mt-3 font-medium text-lg text-gray-500 sm:mt-4 max-w-2xl">Read the latest articles from Corinne and selected guest authors.</h4>
+    </div>
+
+
+    <div class="mt-8 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+
+      <!-- Output The Posts -->
+      {% for post in latest_posts.slice(0,3) %}
+      <div class="bg-neutral-100 rounded-lg">
+        
+        <div class="mast">
+
+          <image src="{{ post.data.cover }}" class="w-auto rounded-t-lg" />
+            <div class="p-6">
+          
+              <h2 class="text-xl font-strong text-neutral-900">
+                <a href="{{ post.data.permalink }}" class="block mt-1">{{ post.data.title }}</a>
+              </h2>
+
+              <div class="mt-1 mb-4 text-sm text-neutral-500 upp">
+                <time datetime="{{ post.data.date | postDate }}">Published: {{ post.data.date | postDate }}</time>
+              </div>
+
+              <div class="text-base leading-7 border-t border-neutral-800/10 pt-6">
+                {{ post.data.summary }}
+              </div>
+
+              <a class="button inline-flex items-center px-4 py-2 mt-10 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-amber-700" href="{{ post.data.permalink }}">Read More &raquo;</a>
+
+  
+            </div>
+        
+        </div>
+        
+
+       
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+
+
